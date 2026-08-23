@@ -1,0 +1,27 @@
+# Scheduled orchestration examples
+#
+# Content pipelines staggered by brand; research refreshed four times daily;
+# self-improvement loops at midnight; governance meeting weekly.
+# Adapt paths and cadence to your deployment.
+
+# Trending research - every 6 hours
+15 */6 * * * cd /opt/orchestrator && ./scripts/trending-research.sh >> /var/log/orchestrator/trending.log 2>&1
+
+# Content publishing windows - one slot per brand, spread across the day
+30 17 * * * cd /opt/orchestrator && python3 scripts/publish.py --brand brand-a >> /var/log/orchestrator/pub-a.log 2>&1
+30 18 * * * cd /opt/orchestrator && python3 scripts/publish.py --brand brand-b >> /var/log/orchestrator/pub-b.log 2>&1
+30 19 * * * cd /opt/orchestrator && python3 scripts/publish.py --brand brand-c >> /var/log/orchestrator/pub-c.log 2>&1
+30 20 * * * cd /opt/orchestrator && python3 scripts/publish.py --brand brand-d >> /var/log/orchestrator/pub-d.log 2>&1
+30 21 * * * cd /opt/orchestrator && python3 scripts/publish.py --brand brand-e >> /var/log/orchestrator/pub-e.log 2>&1
+
+# Self-learning loop - nightly digest of what worked
+0 1 * * * cd /opt/orchestrator && python3 scripts/daily_self_learning.py >> /var/log/orchestrator/learning.log 2>&1
+
+# Health check - daily
+0 0 * * * /usr/bin/env bash /opt/orchestrator/scripts/vps-health.sh >> /var/log/orchestrator/health.log 2>&1
+
+# Weekly board meeting - aggregated agent journals -> action items
+0 16 * * 0 /usr/bin/env python3 /opt/orchestrator/scripts/weekly_board_meeting.py >> /var/log/orchestrator/bod.log 2>&1
+
+# Budget sentinel - always on (systemd recommended instead; see templates/)
+# */5 * * * * /usr/bin/env python3 /opt/orchestrator/scripts/rate_limit_sentinel.py --daemon-check

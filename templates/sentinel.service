@@ -1,0 +1,13 @@
+[Unit]
+Description=Agent Orchestrator Budget Sentinel
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+ExecStart=/usr/bin/python3 /opt/orchestrator/scripts/rate_limit_sentinel.py --budget 5.00 --interval 300
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
