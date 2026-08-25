@@ -92,7 +92,7 @@ Templates for BRAIN.md, cron layouts, and systemd units live in [`templates/`](t
 
 ## License
 
-MIT — commercial use welcome. Built something with it? I'd love to see it.
+PolyForm Noncommercial 1.0.0 — free to use, modify, and contribute for research and noncommercial purposes; commercialization requires separate permission. Built something with it? I'd love to see it.
 
 ---
 
